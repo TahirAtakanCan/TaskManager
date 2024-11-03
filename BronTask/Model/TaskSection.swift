@@ -29,21 +29,38 @@ enum TaskSection: Identifiable, CaseIterable, Hashable {
         }
     }
     
+    var displayName: String {
+            switch self {
+                case .all:
+                    "all"
+                case .done:
+                    "done"
+                case .upcoming:
+                    "upcoming"
+                case .list(let taskGroup):
+                    taskGroup.title
+        }
+    }
+    
     var iconName: String {
         switch self {
-            case .all:
-                "star.circle.fill"
-            case .done:
-                "checkmark.circle.fill"
-            case .upcoming:
-                "calendar.badge.plus"
-            case .list(_):
-                "folder"
+                case .all:
+                    "star.circle.fill"
+                case .done:
+                    "checkmark.circle.fill"
+                case .upcoming:
+                    "calendar.badge.plus"
+                case .list(_):
+                    "folder"
         }
     }
     
     static var allCases: [TaskSection] {
         [.all, .done, .upcoming]
+    }
+    
+    static func == (lhs: TaskSection, rhs: TaskSection) -> Bool {
+        lhs.id == rhs.id
     }
     
 }
