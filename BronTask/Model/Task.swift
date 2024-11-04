@@ -10,9 +10,9 @@ import Foundation
 struct Task: Identifiable, Hashable {
     
     let id = UUID()
-    let title: String
-    let isCompleted: Bool
-    let dueDate: Date
+    var title: String
+    var isCompleted: Bool
+    var dueDate: Date
     var details: String?
     
     init(title: String, isCompleted: Bool = false, dueDate: Date = Date(), details: String? = nil) {
