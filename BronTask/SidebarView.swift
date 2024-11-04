@@ -10,7 +10,7 @@ import SwiftUI
 struct SidebarView: View {
     
     let userCreatedGroups: [TaskGroup]
-    @State private var selection = TaskSection.all
+    @Binding var selection: TaskSection?
     
     var body: some View {
         List(selection: $selection) {
@@ -23,7 +23,7 @@ struct SidebarView: View {
             
             Section("Your Groups") {
                 ForEach(userCreatedGroups) { group in
-                    Label(group.title, systemImage: "folder.badge.plus")
+                    Label(group.title, systemImage: "folder")
                         .tag(TaskSection.list(group))
                 }
             }
@@ -33,6 +33,6 @@ struct SidebarView: View {
 }
 
 #Preview {
-    SidebarView(userCreatedGroups: TaskGroup.exapmles())
+    SidebarView(userCreatedGroups: TaskGroup.exapmles(), selection: .constant(.all))
         .listStyle(.sidebar)
 }

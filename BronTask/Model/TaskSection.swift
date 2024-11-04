@@ -32,11 +32,11 @@ enum TaskSection: Identifiable, CaseIterable, Hashable {
     var displayName: String {
             switch self {
                 case .all:
-                    "all"
+                    "All"
                 case .done:
-                    "done"
+                    "Done"
                 case .upcoming:
-                    "upcoming"
+                    "Upcoming"
                 case .list(let taskGroup):
                     taskGroup.title
         }
@@ -45,11 +45,11 @@ enum TaskSection: Identifiable, CaseIterable, Hashable {
     var iconName: String {
         switch self {
                 case .all:
-                    "star.circle.fill"
+                    "star"
                 case .done:
-                    "checkmark.circle.fill"
+                    "checkmark.circle"
                 case .upcoming:
-                    "calendar.badge.plus"
+                    "calendar"
                 case .list(_):
                     "folder"
         }
