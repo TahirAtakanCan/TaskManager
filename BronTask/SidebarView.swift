@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SidebarView: View {
     
-    let userCreatedGroups: [TaskGroup]
+    @Binding var userCreatedGroups: [TaskGroup]
     @Binding var selection: TaskSection?
     
     var body: some View {
@@ -27,12 +27,23 @@ struct SidebarView: View {
                         .tag(TaskSection.list(group))
                 }
             }
-            
+        }
+        .safeAreaInset(edge: .bottom) {
+            Button(action: {
+                let newGroup = TaskGroup(title: "New Group")
+                userCreatedGroups.append(newGroup)
+            }, label: {
+                Label("Add Group", systemImage: "plus.circle")
+            })
+            .buttonStyle(.borderless)
+            .foregroundColor(.accentColor)
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
 
 #Preview {
-    SidebarView(userCreatedGroups: TaskGroup.exapmles(), selection: .constant(.all))
+    SidebarView(userCreatedGroups: .constant(TaskGroup.exapmles()), selection: .constant(.all))
         .listStyle(.sidebar)
 }
