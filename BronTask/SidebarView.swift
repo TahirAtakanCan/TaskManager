@@ -22,8 +22,11 @@ struct SidebarView: View {
             }
             
             Section("Your Groups") {
-                ForEach(userCreatedGroups) { group in
-                    Label(group.title, systemImage: "folder")
+                ForEach($userCreatedGroups) { $group in
+                    HStack {
+                        Image(systemName: "folder")
+                        TextField("New Group", text: $group.title)
+                    }
                         .tag(TaskSection.list(group))
                 }
             }

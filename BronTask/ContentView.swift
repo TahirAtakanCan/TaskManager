@@ -21,13 +21,13 @@ struct ContentView: View {
             
             switch selection {
             case .all:
-                TaskListView(title: "All", tasks: allTask)
+                TaskListView(title: "All", tasks: $allTask)
             case .done:
-                TaskListView(title: "All", tasks: allTask.filter({ $0.isCompleted}))
+                StaticTaskListView(title: "All", tasks: allTask.filter({ $0.isCompleted}))
             case .upcoming:
-                TaskListView(title: "All", tasks: allTask.filter({ !$0.isCompleted}))
+                StaticTaskListView(title: "All", tasks: allTask.filter({ !$0.isCompleted}))
             case .list(let taskGroup):
-                TaskListView(title: taskGroup.title, tasks: taskGroup.tasks)
+                StaticTaskListView(title: taskGroup.title, tasks: taskGroup.tasks)
             case .none:
                 Text("No selection")
             }

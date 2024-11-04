@@ -2,7 +2,7 @@
 //  TaskListView.swift
 //  BronTask
 //
-//  Created by Tahir Atakan Can on 3.11.2024.
+//  Created by Tahir Atakan Can on 4.11.2024.
 //
 
 import SwiftUI
@@ -10,7 +10,7 @@ import SwiftUI
 struct TaskListView: View {
     
     let title: String
-    let tasks: [Task]
+    @Binding var tasks: [Task]
     
     var body: some View {
         List(tasks) { task in
@@ -19,9 +19,16 @@ struct TaskListView: View {
                 Text(task.title)
             }
         }
+        .toolbar {
+            Button {
+                tasks.append(Task(title: "New Task"))
+            } label: {
+                Label("Add New Task", systemImage: "plus")
+            }
+        }
     }
 }
 
 #Preview {
-    TaskListView(title: "All", tasks: Task.examples())
+    TaskListView(title: "All", tasks: .constant(Task.examples()))
 }
