@@ -13,5 +13,17 @@ struct BronTaskApp: App {
         WindowGroup {
             ContentView()
         }
+        .commands {
+            CommandMenu("Task") {
+                Button("Add New Task") {
+                    
+                }
+            }
+            CommandGroup(after: .newItem) {
+                Button("Add New Group") {
+                    
+                }
+            }
+        }
     }
 }
