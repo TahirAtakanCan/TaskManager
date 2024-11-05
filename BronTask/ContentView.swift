@@ -13,10 +13,12 @@ struct ContentView: View {
     
     @State private var allTask = Task.examples()
     @State private var userCreatedGroups: [TaskGroup] = TaskGroup.exapmles()
+    @State private var searchTerm: String = ""
+    
     
     var body: some View {
         NavigationSplitView {
-            SidebarView(userCreatedGroups: $userCreatedGroups, selection: $selection)
+            SidebarView(userCreatedGroups: $userCreatedGroups, selection: $selection).searchable(text: $searchTerm, placement: .sidebar)
         } detail: {
             
             switch selection {
