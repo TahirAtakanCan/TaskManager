@@ -18,22 +18,27 @@ struct ContentView: View {
     
     var body: some View {
         NavigationSplitView {
-            SidebarView(userCreatedGroups: $userCreatedGroups, selection: $selection).searchable(text: $searchTerm, placement: .sidebar)
+            SidebarView(userCreatedGroups: $userCreatedGroups, selection: $selection)
         } detail: {
             
-            switch selection {
-            case .all:
-                TaskListView(title: "All", tasks: $allTask)
-            case .done:
-                StaticTaskListView(title: "All", tasks: allTask.filter({ $0.isCompleted}))
-            case .upcoming:
-                StaticTaskListView(title: "All", tasks: allTask.filter({ !$0.isCompleted}))
-            case .list(let taskGroup):
-                StaticTaskListView(title: taskGroup.title, tasks: taskGroup.tasks)
-            case .none:
-                Text("No selection")
+            if searchTerm.isEmpty {
+                switch selection {
+                case .all:
+                    TaskListView(title: "All", tasks: $allTask)
+                case .done:
+                    StaticTaskListView(title: "All", tasks: allTask.filter({ $0.isCompleted}))
+                case .upcoming:
+                    StaticTaskListView(title: "All", tasks: allTask.filter({ !$0.isCompleted}))
+                case .list(let taskGroup):
+                    StaticTaskListView(title: taskGroup.title, tasks: taskGroup.tasks)
+                case .none:
+                    Text("No selection")
+                }
+            } else {
+                StaticTaskListView(title: "All", tasks: allTask.filter({ $0.title.contains(searchTerm) }))
             }
         }
+        .searchable(text: $searchTerm)
     }
 }
 
