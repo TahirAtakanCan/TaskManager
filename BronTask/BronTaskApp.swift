@@ -18,6 +18,7 @@ struct BronTaskApp: App {
                 Button("Add New Task") {
                     
                 }
+                .keyboardShortcut(KeyEquivalent("r"), modifiers: .command)
             }
             CommandGroup(after: .newItem) {
                 Button("Add New Group") {
