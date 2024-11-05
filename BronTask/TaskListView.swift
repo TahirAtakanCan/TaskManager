@@ -11,17 +11,37 @@ struct TaskListView: View {
     
     let title: String
     @Binding var tasks: [Task]
+    @State private var selectedTask: Task? = nil
+    
+    @State private var inspectorIsShown: Bool = false
     
     var body: some View {
         List($tasks) { $task in
-            TaskView(task: $task)
+            TaskView(task: $task, selectedTask: $selectedTask, inspectorIsShown: $inspectorIsShown)
         }
         .toolbar {
-            Button {
-                tasks.append(Task(title: "New Task"))
-            } label: {
-                Label("Add New Task", systemImage: "plus")
+            ToolbarItemGroup {
+                Button {
+                    tasks.append(Task(title: "New Task"))
+                } label: {
+                    Label("Add New Task", systemImage: "plus")
+                }
+                Button {
+                    inspectorIsShown.toggle()
+                } label: {
+                    Label("Show Inspector", systemImage: "sidebar.right")
+                }
             }
+        }
+        .inspector(isPresented: $inspectorIsShown) {
+            Group {
+                if let selectedTask {
+                    Text(selectedTask.title).font(.title)
+                } else {
+                    Text("Nothing Selected")
+                }
+            }
+            .frame(minWidth: 100, maxWidth: .infinity)
         }
     }
 }
