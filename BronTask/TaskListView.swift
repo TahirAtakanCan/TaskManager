@@ -19,6 +19,7 @@ struct TaskListView: View {
         List($tasks) { $task in
             TaskView(task: $task, selectedTask: $selectedTask, inspectorIsShown: $inspectorIsShown)
         }
+        .navigationTitle(title)
         .toolbar {
             ToolbarItemGroup {
                 Button {
